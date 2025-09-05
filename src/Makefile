@@ -113,16 +113,12 @@ dist:
 ## clang_format: Форматирование кода с помощью clang-format
 clang_format:
 	@echo "Форматирование кода..."
-	@cp ../materials/linters/.clang-format .clang-format
 	clang-format -i $(SRC_FILES)
-	@rm -f .clang-format
 
 ## clang_check: Проверка форматирования кода
 clang_check:
 	@echo "Проверка форматирования кода..."
-	@cp ../materials/linters/.clang-format .clang-format
 	clang-format -n $(SRC_FILES)
-	@rm -f .clang-format
 
 ## get_packets: Установка необходимых пакетов
 get_packets:
