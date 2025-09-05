@@ -1,0 +1,792 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>3D Model Viewer</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="mainLayout">
+    <!-- ЛЕВАЯ ЧАСТЬ: Зона визуализации (уменьшена) -->
+    <item>
+     <widget class="QFrame" name="visualizationFrame">
+      <property name="maximumWidth">
+       <number>830</number>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <layout class="QVBoxLayout" name="visualizationLayout">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <property name="leftMargin">
+        <number>10</number>
+       </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
+       <property name="rightMargin">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="visualizationLabel">
+         <property name="text">
+          <string>Зона визуализации модели</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Box</enum>
+         </property>
+         <property name="margin">
+          <number>5</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+
+    <!-- ПРАВАЯ ЧАСТЬ: Управление в сетке -->
+    <item>
+     <widget class="QFrame" name="controlFrame">
+      <property name="maximumWidth">
+       <number>330</number>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <layout class="QGridLayout" name="controlGridLayout">
+       <property name="spacing">
+        <number>5</number>
+       </property>
+       <property name="leftMargin">
+        <number>4</number>
+       </property>
+       <property name="topMargin">
+        <number>4</number>
+       </property>
+       <property name="rightMargin">
+        <number>4</number>
+       </property>
+       <property name="bottomMargin">
+        <number>4</number>
+       </property>
+
+       <!-- Группа: Загрузка (вся ширина) -->
+       <item row="0" column="0" colspan="2">
+        <widget class="QGroupBox" name="fileGroup">
+         <property name="title">
+          <string>Загрузка</string>
+         </property>
+         <layout class="QVBoxLayout" name="fileLayout">
+          <property name="spacing">
+           <number>3</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="loadButton">
+            <property name="text">
+             <string>Выбрать файл...</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="filePathEdit">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="placeholderText">
+             <string>—</string>
+            </property>
+            <property name="maximumHeight">
+             <number>22</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- Группа: Сдвиг -->
+       <item row="1" column="0">
+        <widget class="QGroupBox" name="translateGroup">
+         <property name="title">
+          <string>Сдвиг</string>
+         </property>
+         <layout class="QVBoxLayout" name="translateLayout">
+          <property name="spacing">
+           <number>2</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="layoutTranslateX">
+            <item>
+             <widget class="QLabel" name="labelX">
+              <property name="text">
+               <string>X:</string>
+              </property>
+              <property name="minimumWidth">
+               <number>12</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="translateXEdit">
+              <property name="text">
+               <string>0.0</string>
+              </property>
+              <property name="maximumWidth">
+               <number>50</number>
+              </property>
+              <property name="maximumHeight">
+               <number>18</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QSlider" name="translateXSlider">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="minimum">
+             <number>-100</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="value">
+             <number>0</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="layoutTranslateY">
+            <item>
+             <widget class="QLabel" name="labelY">
+              <property name="text">
+               <string>Y:</string>
+              </property>
+              <property name="minimumWidth">
+               <number>12</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="translateYEdit">
+              <property name="text">
+               <string>0.0</string>
+              </property>
+              <property name="maximumWidth">
+               <number>50</number>
+              </property>
+              <property name="maximumHeight">
+               <number>18</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QSlider" name="translateYSlider">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="minimum">
+             <number>-100</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="value">
+             <number>0</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="layoutTranslateZ">
+            <item>
+             <widget class="QLabel" name="labelZ">
+              <property name="text">
+               <string>Z:</string>
+              </property>
+              <property name="minimumWidth">
+               <number>12</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="translateZEdit">
+              <property name="text">
+               <string>0.0</string>
+              </property>
+              <property name="maximumWidth">
+               <number>50</number>
+              </property>
+              <property name="maximumHeight">
+               <number>18</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QSlider" name="translateZSlider">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="minimum">
+             <number>-100</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="value">
+             <number>0</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- Группа: Настройка проекции и рёбер -->
+       <item row="1" column="1">
+        <widget class="QGroupBox" name="settingsGroup1">
+         <property name="title">
+          <string>Отображение</string>
+         </property>
+         <layout class="QVBoxLayout" name="settings1Layout">
+          <property name="spacing">
+           <number>2</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="labelProjection">
+            <property name="text">
+             <string>Проекция:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="parallelProjectionRadio">
+            <property name="text">
+             <string>Паралл.</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="perspectiveProjectionRadio">
+            <property name="text">
+             <string>Центр.</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="line1">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelEdgesStyle">
+            <property name="text">
+             <string>Рёбра:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="edgeLineStyleLayout">
+            <item>
+             <widget class="QLabel" name="labelEdgeLineStyle">
+              <property name="text">
+               <string>Тип:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="edgeLineStyleCombo">
+              <item>
+               <property name="text">
+                <string>Сплошн.</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Пункт.</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="edgeColorLayout">
+            <item>
+             <widget class="QLabel" name="labelEdgeColor">
+              <property name="text">
+               <string>Цв:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="edgeColorButton">
+              <property name="text">
+               <string>●</string>
+              </property>
+              <property name="maximumWidth">
+               <number>30</number>
+              </property>
+              <property name="maximumHeight">
+               <number>18</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="edgeWidthLayout">
+            <item>
+             <widget class="QLabel" name="labelEdgeWidth">
+              <property name="text">
+               <string>Толщ.:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="edgeWidthSpinBox">
+              <property name="value">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>10</number>
+              </property>
+              <property name="maximumWidth">
+               <number>45</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- Группа: Поворот -->
+       <item row="2" column="0">
+        <widget class="QGroupBox" name="rotateGroup">
+         <property name="title">
+          <string>Поворот</string>
+         </property>
+         <layout class="QVBoxLayout" name="rotateLayout">
+          <property name="spacing">
+           <number>2</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="layoutRotX">
+            <item>
+             <widget class="QLabel" name="labelRotX">
+              <property name="text">
+               <string>X:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="rotateXEdit">
+              <property name="text">
+               <string>0</string>
+              </property>
+              <property name="maximumWidth">
+               <number>50</number>
+              </property>
+              <property name="maximumHeight">
+               <number>18</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QSlider" name="rotateXSlider">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="minimum">
+             <number>0</number>
+            </property>
+            <property name="maximum">
+             <number>360</number>
+            </property>
+            <property name="value">
+             <number>0</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="layoutRotY">
+            <item>
+             <widget class="QLabel" name="labelRotY">
+              <property name="text">
+               <string>Y:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="rotateYEdit">
+              <property name="text">
+               <string>0</string>
+              </property>
+              <property name="maximumWidth">
+               <number>50</number>
+              </property>
+              <property name="maximumHeight">
+               <number>18</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QSlider" name="rotateYSlider">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="minimum">
+             <number>0</number>
+            </property>
+            <property name="maximum">
+             <number>360</number>
+            </property>
+            <property name="value">
+             <number>0</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="layoutRotZ">
+            <item>
+             <widget class="QLabel" name="labelRotZ">
+              <property name="text">
+               <string>Z:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="rotateZEdit">
+              <property name="text">
+               <string>0</string>
+              </property>
+              <property name="maximumWidth">
+               <number>50</number>
+              </property>
+              <property name="maximumHeight">
+               <number>18</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QSlider" name="rotateZSlider">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="minimum">
+             <number>0</number>
+            </property>
+            <property name="maximum">
+             <number>360</number>
+            </property>
+            <property name="value">
+             <number>0</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- Группа: Вершины -->
+       <item row="2" column="1">
+        <widget class="QGroupBox" name="verticesGroup">
+         <property name="title">
+          <string>Вершины</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticesLayout">
+          <property name="spacing">
+           <number>2</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="vertexStyleLayout">
+            <item>
+             <widget class="QLabel" name="labelVertexStyle">
+              <property name="text">
+               <string>Стиль:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="vertexStyleCombo">
+ <item>
+  <property name="text">
+   <string>Круг</string>
+  </property>
+ </item>
+ <item>
+  <property name="text">
+   <string>Квадр</string>
+  </property>
+ </item>
+</widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="vertexColorLayout">
+            <item>
+             <widget class="QLabel" name="labelVertexColor">
+              <property name="text">
+               <string>Цв:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="vertexColorButton">
+              <property name="text">
+               <string>●</string>
+              </property>
+              <property name="maximumWidth">
+               <number>30</number>
+              </property>
+              <property name="maximumHeight">
+               <number>18</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="vertexSizeLayout">
+            <item>
+             <widget class="QLabel" name="labelVertexSize">
+              <property name="text">
+               <string>Размер:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="vertexSizeSpinBox">
+              <property name="value">
+               <number>3</number>
+              </property>
+              <property name="maximum">
+               <number>20</number>
+              </property>
+              <property name="maximumWidth">
+               <number>45</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- Группа: Масштаб -->
+       <item row="3" column="0">
+        <widget class="QGroupBox" name="scaleGroup">
+         <property name="title">
+          <string>Масштаб</string>
+         </property>
+         <layout class="QVBoxLayout" name="scaleLayout">
+          <property name="spacing">
+           <number>2</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="layoutScale">
+            <item>
+             <widget class="QLabel" name="labelScale">
+              <property name="text">
+               <string>М:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="scaleFactorEdit">
+              <property name="text">
+               <string>1.00</string>
+              </property>
+              <property name="maximumWidth">
+               <number>50</number>
+              </property>
+              <property name="maximumHeight">
+               <number>18</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QSlider" name="scaleFactorSlider">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="minimum">
+             <number>10</number>
+            </property>
+            <property name="maximum">
+             <number>1000</number>
+            </property>
+            <property name="value">
+             <number>100</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- Группа: Цвет фона -->
+       <item row="3" column="1">
+        <widget class="QGroupBox" name="backgroundGroup">
+         <property name="title">
+          <string>Фон</string>
+         </property>
+         <layout class="QVBoxLayout" name="backgroundLayout">
+          <property name="spacing">
+           <number>2</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="backgroundColorLayout">
+            <item>
+             <widget class="QLabel" name="labelBackgroundColor">
+              <property name="text">
+               <string>Цв:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="backgroundColorButton">
+              <property name="text">
+               <string>●</string>
+              </property>
+              <property name="maximumWidth">
+               <number>30</number>
+              </property>
+              <property name="maximumHeight">
+               <number>18</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+       <!-- Группа: Информация (компактная, вся ширина) -->
+       <item row="4" column="0" colspan="2">
+        <widget class="QGroupBox" name="infoGroup">
+         <property name="title">
+          <string>Инфо</string>
+         </property>
+         <layout class="QFormLayout" name="infoLayout">
+          <property name="horizontalSpacing">
+           <number>6</number>
+          </property>
+          <property name="verticalSpacing">
+           <number>3</number>
+          </property>
+          <property name="fieldGrowthPolicy">
+           <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+          </property>
+
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelFileName">
+            <property name="text">
+             <string>Ф:</string>
+            </property>
+            <property name="toolTip">
+             <string>Файл</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="infoFileName">
+            <property name="text">
+             <string>—</string>
+            </property>
+            <property name="textInteractionFlags">
+             <set>Qt::TextSelectableByMouse</set>
+            </property>
+           </widget>
+          </item>
+
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelVertices">
+            <property name="text">
+             <string>В:</string>
+            </property>
+            <property name="toolTip">
+             <string>Вершины</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="infoVertices">
+            <property name="text">
+             <string>0</string>
+            </property>
+           </widget>
+          </item>
+
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelEdges">
+            <property name="text">
+             <string>Р:</string>
+            </property>
+            <property name="toolTip">
+             <string>Рёбра</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="infoEdges">
+            <property name="text">
+             <string>0</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar"/>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
+

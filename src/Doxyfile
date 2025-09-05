@@ -1,0 +1,75 @@
+# Doxyfile 1.9.1
+
+#---------------------------------------------------------------------------
+# Project related configuration options
+#---------------------------------------------------------------------------
+PROJECT_NAME           = "3DViewer v2.0"
+PROJECT_NUMBER         = 2.0
+PROJECT_BRIEF          = "3D Model Viewer Application"
+OUTPUT_DIRECTORY       = docs
+CREATE_SUBDIRS         = YES
+
+#---------------------------------------------------------------------------
+# Build related configuration options
+#---------------------------------------------------------------------------
+EXTRACT_ALL            = YES
+EXTRACT_STATIC         = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_PACKAGE        = YES
+EXTRACT_ANON_NSPACES   = YES
+HIDE_UNDOC_MEMBERS     = NO
+HIDE_UNDOC_CLASSES     = NO
+
+#---------------------------------------------------------------------------
+# Input files and paths
+#---------------------------------------------------------------------------
+INPUT                  = .
+FILE_PATTERNS          = *.cpp *.hpp *.h *.cc
+EXTENSION_MAPPING      = hpp=src h=src cpp=src cc=src
+RECURSIVE              = YES
+
+# Исключаем тесты и сборку
+EXCLUDE_PATTERNS       = */build/* \
+                         */test/* \
+                         */tests/* \
+                         */.git/*
+
+#---------------------------------------------------------------------------
+# Generate HTML documentation
+#---------------------------------------------------------------------------
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+HTML_FILE_EXTENSION    = .html
+GENERATE_TREEVIEW      = YES
+TREEVIEW_WIDTH         = 250
+ENABLED_SECTIONS       = 
+
+#---------------------------------------------------------------------------
+# Enable source browsing
+#---------------------------------------------------------------------------
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = YES
+STRIP_CODE_COMMENTS    = YES
+
+#---------------------------------------------------------------------------
+# Enable class diagrams
+#---------------------------------------------------------------------------
+CLASS DIAGRAMS         = YES
+HAVE_DOT               = YES
+DOT_PATH               = /usr/bin/dot
+DOT_IMAGE_FORMAT       = png
+DOT_NUM_THREADS        = 0
+
+#---------------------------------------------------------------------------
+# Preprocessing
+#---------------------------------------------------------------------------
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = NO
+SEARCH_INCLUDES        = YES
+INCLUDE_PATH           = src
+
+#---------------------------------------------------------------------------
+# Main page
+#---------------------------------------------------------------------------
+MAINPAGE               = README.md
